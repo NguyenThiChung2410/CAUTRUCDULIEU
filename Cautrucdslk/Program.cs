@@ -80,6 +80,59 @@ namespace Cautrucdslk
                 p.Next = null;
             }
         }
+        public void DeleteNode(int x)
+        {
+            if (Head != null)
+            {
+                Node p = Head;
+                Node q = null;
+                while (p != null && p.Info != x)
+                {
+                    q = p;
+                    p = p.Next;
+                }
+                if (p != null)
+                {
+                    if (p == Head)
+                    {
+                        DeleteHead();
+                    }
+                    else
+                    {
+                        q.Next = p.Next;
+                        p.Next = null;
+                    }
+                }
+            }
+        }
+        public Node findMax()
+        {
+            Node max = Head;
+            Node p = Head.Next;
+            while (p != null)
+            {
+                if (p.Info > max.Info)
+                {
+                    max = p;
+                }
+                p = p.Next;
+            }
+            return max;
+        }
+        public int Avg()
+        {
+            int sum = 0;
+            int count = 0;
+            Node p = Head;
+            while (p != null)
+            {
+                sum += p.Info;
+                count++;
+                p = p.Next;
+
+            }
+            return sum / count;
+        }
         public void ProcessList()
         {
             Node p = Head;
@@ -129,6 +182,23 @@ namespace Cautrucdslk
             s.DeleteLast();
             Console.Write("\nDanh sach lien ket sau khi xoa cuoi:");
             s.ProcessList();
+
+            s.DeleteLast();
+            Console.Write("\nDanh sach lien ket sau khi xoa cuoi:");
+            s.ProcessList();
+
+            Console.Write("\nNhap gia tri x can xoa:");
+            int x = int.Parse(Console.ReadLine());
+            s.DeleteNode(x);
+            Console.Write($"\nDanh sach lien ket sau khi xoa nut co gia tri:");
+            s.ProcessList();
+
+
+            Console.Write($"\nNut co gia tri lon nhat:{s.findMax().Info}");
+
+
+            Console.Write($"\nGia tri trung binh cac nut:{s.Avg()}");
+
             Console.ReadLine();
 
         }
